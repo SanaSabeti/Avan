@@ -1,3 +1,4 @@
+package ir.asta;
 import java.util.Objects;
 
 public class Student extends Person implements Gradable {

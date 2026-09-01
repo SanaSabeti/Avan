@@ -1,3 +1,4 @@
+package ir.asta;
 import java.time.LocalDateTime;
 
 public abstract class Person {
