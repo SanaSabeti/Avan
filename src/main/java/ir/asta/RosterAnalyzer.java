@@ -36,7 +36,7 @@ public class RosterAnalyzer {
         int response;
         do {
             System.out.println("What do you want to do?");
-            System.out.println("Menu:\n1) Add student\n2) Show all members\n3) Curve scores\n4) Add teacher\n5) Sort students\n6)Find student by ID and compare performance\n7) Exit");
+            System.out.println("Menu:\n1) Add student\n2) Show all members\n3) Curve scores\n4) Add teacher\n5) Show students with their rank\n6)Find student by ID and compare performance\n7) Exit");
             response = scanner.nextInt();
             switch (response) {
                 case 1:

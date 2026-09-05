@@ -60,11 +60,17 @@ public class Classroom implements Iterable<Student> {
         students.sort(new Comparator<Student>() {
             @Override
             public int compare(Student s1, Student s2) {
-                return Integer.compare(s1.getScore(), s2.getScore());
+                return Integer.compare(s2.getScore(), s1.getScore());
             }
         });
-        for (Student s : students) {
-            System.out.println(s.toString());
+        List<Pair<Student, Integer>> rankedStudents = new ArrayList<>();
+        int rank = 1;
+        for (Student student : this) {
+            rankedStudents.add(new Pair<>(student, rank));
+            rank++;
+        }
+        for (Pair<Student, Integer> pair : rankedStudents) {
+            System.out.println("Rank: " + pair.getSecondElement() + ") " + pair.getFirstElement().getName() + ", " + pair.getFirstElement().getScore());
         }
     }
 
@@ -101,6 +107,7 @@ public class Classroom implements Iterable<Student> {
     public Iterator<Student> iterator() {
         return new Iterator<Student>() {
             int counter = 0;
+
             @Override
             public boolean hasNext() {
                 return counter < students.size();
@@ -112,4 +119,6 @@ public class Classroom implements Iterable<Student> {
             }
         };
     }
+
+
 }
