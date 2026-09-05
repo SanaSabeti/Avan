@@ -2,7 +2,7 @@ package ir.asta;
 
 import java.util.*;
 
-public class Classroom {
+public class Classroom implements Iterable<Student> {
     private List<Student> students = new ArrayList<>();
     private List<Person> persons = new ArrayList<>();
     private Set<String> names = new HashSet<>();
@@ -24,7 +24,7 @@ public class Classroom {
 
     public double average() {
         int sum = 0;
-        for (Student student : students) {
+        for (Student student : this) {
             sum += student.getScore();
         }
         return (double) sum / students.size();
@@ -51,7 +51,7 @@ public class Classroom {
     }
 
     public void curve(int points) {
-        for (Student student : students) {
+        for (Student student : this) {
             student.curveScore(points);
         }
     }
@@ -95,5 +95,21 @@ public class Classroom {
             }
         }
         return null;
+    }
+
+    @Override
+    public Iterator<Student> iterator() {
+        return new Iterator<Student>() {
+            int counter = 0;
+            @Override
+            public boolean hasNext() {
+                return counter < students.size();
+            }
+
+            @Override
+            public Student next() {
+                return students.get(counter++);
+            }
+        };
     }
 }
