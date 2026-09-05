@@ -22,9 +22,12 @@ public class RosterAnalyzer {
                 System.out.println("Enter the student again!");
             } else if (score >= 0 && score <= 100) {
                 Student student = new Student(name, score);
-                classroom.addStudent(student);
-                counter++;
-                System.out.println("OK, Next!");
+                if (classroom.addStudent(student)) {
+                    counter++;
+                    System.out.println("OK, Next!");
+                } else {
+                    System.out.println("Duplicate name!Pls Enter the student again!");
+                }
             } else {
                 System.out.println("Warning: invalid score!");
                 System.out.println("Enter the student again!");
@@ -48,8 +51,11 @@ public class RosterAnalyzer {
                                 System.out.println("Enter the student again!");
                             } else if (score >= 0 && score <= 100) {
                                 Student student = new Student(name, score);
-                                classroom.addStudent(student);
-                                break;
+                                if (classroom.addStudent(student)) {
+                                    break;
+                                } else {
+                                    System.out.println("Duplicate name!Pls Enter the student again!");
+                                }
                             } else {
                                 System.out.println("Warning: invalid score!");
                                 System.out.println("Enter the student again!");

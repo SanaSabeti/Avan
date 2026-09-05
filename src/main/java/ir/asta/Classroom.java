@@ -1,16 +1,18 @@
 package ir.asta;
-import java.util.ArrayList;
-
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class Classroom {
     private List<Student> students = new ArrayList<>();
     private List<Person> persons = new ArrayList<>();
+    private Set<String> names = new HashSet<>();
 
-    public void addStudent(Student student) {
+    public boolean addStudent(Student student) {
+        if (!names.add(student.getName())){
+            return false;
+        }
         students.add(student);
         persons.add(student);
+        return true;
     }
 
     public void addTeacher(Teacher teacher) {
