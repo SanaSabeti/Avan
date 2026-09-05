@@ -24,6 +24,10 @@ public class Student extends Person implements Gradable {
         return score;
     }
 
+    public int getId(){
+        return id;
+    }
+
     @Override
     public String toString() {
         return "Student number" + id + ", name= " + getName() + ", score= " + score;

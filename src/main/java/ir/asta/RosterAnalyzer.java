@@ -36,7 +36,7 @@ public class RosterAnalyzer {
         int response;
         do {
             System.out.println("What do you want to do?");
-            System.out.println("Menu:\n1) Add student\n2) Show all members\n3) Curve scores\n4) Add teacher\n5) Sort students\n6) Exit");
+            System.out.println("Menu:\n1) Add student\n2) Show all members\n3) Curve scores\n4) Add teacher\n5) Sort students\n6)Find student by ID and compare performance\n7) Exit");
             response = scanner.nextInt();
             switch (response) {
                 case 1:
@@ -83,11 +83,27 @@ public class RosterAnalyzer {
                     classroom.sortStudents();
                     break;
                 case 6:
+                    Student linearResult = null;
+                    Student mapResult = null;
+                    System.out.println("Enter ur desired student ID:");
+                    int desiredId = scanner.nextInt();
+                    long linearStart = System.nanoTime();
+                    linearResult = classroom.findStudentWithIdLinear(desiredId);
+                    long linearEnd = System.nanoTime();
+                    long mapStart = System.nanoTime();
+                    mapResult = classroom.findStudentWithIdMap(desiredId);
+                    long mapEnd = System.nanoTime();
+                    long linearTime = linearEnd - linearStart;
+                    long mapTime = mapEnd - mapStart;
+                    System.out.println("Linear search time: " + linearTime + " - " + linearResult.getName());
+                    System.out.println("HashMap search time: " + mapTime + " - " + mapResult.getName());
+                    break;
+                case 7:
                     System.out.println("Goodbye!");
                     break;
                 default:
                     System.out.println("Invalid option");
             }
-        } while (response != 6);
+        } while (response != 7);
     }
 }

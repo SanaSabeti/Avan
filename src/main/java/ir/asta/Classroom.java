@@ -1,17 +1,20 @@
 package ir.asta;
+
 import java.util.*;
 
 public class Classroom {
     private List<Student> students = new ArrayList<>();
     private List<Person> persons = new ArrayList<>();
     private Set<String> names = new HashSet<>();
+    private HashMap<Integer, Student> studentsWithId = new HashMap<>();
 
     public boolean addStudent(Student student) {
-        if (!names.add(student.getName())){
+        if (!names.add(student.getName())) {
             return false;
         }
         students.add(student);
         persons.add(student);
+        studentsWithId.put(student.getId(), student);
         return true;
     }
 
@@ -79,5 +82,18 @@ public class Classroom {
         System.out.println("Average: " + average());
         System.out.println("Maximum: " + max());
         System.out.println("Minimum: " + min());
+    }
+
+    public Student findStudentWithIdMap(int id) {
+        return studentsWithId.get(id);
+    }
+
+    public Student findStudentWithIdLinear(int id) {
+        for (Student student : students) {
+            if (student.getId() == id) {
+                return student;
+            }
+        }
+        return null;
     }
 }
