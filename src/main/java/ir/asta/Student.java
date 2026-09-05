@@ -1,4 +1,5 @@
 package ir.asta;
+
 import java.util.Objects;
 
 public class Student extends Person implements Gradable {
@@ -24,7 +25,7 @@ public class Student extends Person implements Gradable {
         return score;
     }
 
-    public int getId(){
+    public int getId() {
         return id;
     }
 
@@ -65,5 +66,10 @@ public class Student extends Person implements Gradable {
         if (score > 100) {
             score = 100;
         }
+    }
+
+    @Override
+    public boolean isPassing() {
+        return getGrade() != Grade.F;
     }
 }
