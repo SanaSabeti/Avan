@@ -120,5 +120,9 @@ public class Classroom implements Iterable<Student> {
         };
     }
 
-
+    public void addStudents(Student... students) {
+        for (Student student : students) {
+            addStudent(student);
+        }
+    }
 }
