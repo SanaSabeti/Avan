@@ -36,34 +36,11 @@ public class RosterAnalyzer {
         int response;
         do {
             System.out.println("What do you want to do?");
-            System.out.println("Menu:\n1) Add student\n2) Show all members\n3) Curve scores\n4) Add teacher\n5) Show students with their rank\n6)Find student by ID and compare performance\n7) Exit");
+            System.out.println("Menu:\n1) Add student\n2) Show all members\n3) Curve scores\n4) Add teacher\n5) Show students with their rank\n6) Find student by ID and compare performance\n7) Exit");
             response = scanner.nextInt();
             switch (response) {
                 case 1:
-                    char answer = 'y';
-                    while (answer == 'y') {
-                        while (true) {
-                            System.out.println("Student's name:");
-                            String name = scanner.next();
-                            System.out.println("Student's score:");
-                            int score = scanner.nextInt();
-                            if (score == -1) {
-                                System.out.println("Enter the student again!");
-                            } else if (score >= 0 && score <= 100) {
-                                Student student = new Student(name, score);
-                                if (classroom.addStudent(student)) {
-                                    break;
-                                } else {
-                                    System.out.println("Duplicate name!Pls Enter the student again!");
-                                }
-                            } else {
-                                System.out.println("Warning: invalid score!");
-                                System.out.println("Enter the student again!");
-                            }
-                        }
-                        System.out.println("Add another student? (y/n)");
-                        answer = scanner.next().charAt(0);
-                    }
+                    handleCase1(scanner, classroom);
                     break;
                 case 2:
                     classroom.showReport();
@@ -83,8 +60,8 @@ public class RosterAnalyzer {
                     classroom.sortStudents();
                     break;
                 case 6:
-                    Student linearResult ;
-                    Student mapResult ;
+                    Student linearResult;
+                    Student mapResult;
                     System.out.println("Enter ur desired student ID:");
                     int desiredId = scanner.nextInt();
                     long linearStart = System.nanoTime();
@@ -105,5 +82,32 @@ public class RosterAnalyzer {
                     System.out.println("Invalid option");
             }
         } while (response != 7);
+    }
+
+    private static void handleCase1(Scanner scanner, Classroom classroom) {
+        char answer = 'y';
+        while (answer == 'y') {
+            while (true) {
+                System.out.println("Student's name:");
+                String name = scanner.next();
+                System.out.println("Student's score:");
+                int score = scanner.nextInt();
+                if (score == -1) {
+                    System.out.println("Enter the student again!");
+                } else if (score >= 0 && score <= 100) {
+                    Student student = new Student(name, score);
+                    if (classroom.addStudent(student)) {
+                        break;
+                    } else {
+                        System.out.println("Duplicate name!Pls Enter the student again!");
+                    }
+                } else {
+                    System.out.println("Warning: invalid score!");
+                    System.out.println("Enter the student again!");
+                }
+            }
+            System.out.println("Add another student? (y/n)");
+            answer = scanner.next().charAt(0);
+        }
     }
 }
