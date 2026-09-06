@@ -3,21 +3,26 @@ package ir.asta;
 import java.util.Scanner;
 
 public class RosterAnalyzer {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Classroom classroom = new Classroom();
+
         System.out.println("Teacher's name:");
         String teacherName = scanner.next();
         Teacher teacher = new Teacher(teacherName);
         classroom.addTeacher(teacher);
+
         System.out.println("How many students do you have?");
         int n = scanner.nextInt();
+
         int counter = 0;
         while (counter < n) {
             System.out.println("Student's name:");
             String name = scanner.next();
+
             System.out.println("Student's score:");
             int score = scanner.nextInt();
+
             if (score == -1) {
                 System.out.println("Enter the student again!");
             } else if (score >= 0 && score <= 100) {
@@ -26,7 +31,7 @@ public class RosterAnalyzer {
                     counter++;
                     System.out.println("OK, Next!");
                 } else {
-                    System.out.println("Duplicate name!Pls Enter the student again!");
+                    System.out.println("Duplicate name! Pls Enter the student again!");
                 }
             } else {
                 System.out.println("Warning: invalid score!");
@@ -77,8 +82,10 @@ public class RosterAnalyzer {
             while (true) {
                 System.out.println("Student's name:");
                 String name = scanner.next();
+
                 System.out.println("Student's score:");
                 int score = scanner.nextInt();
+
                 if (score == -1) {
                     System.out.println("Enter the student again!");
                 } else if (score >= 0 && score <= 100) {
@@ -101,14 +108,18 @@ public class RosterAnalyzer {
     private static void findStudentAndComparePerformance(Scanner scanner, Classroom classroom) {
         Student linearResult;
         Student mapResult;
+
         System.out.println("Enter your desired student ID:");
         int desiredId = scanner.nextInt();
+
         long linearStart = System.nanoTime();
         linearResult = classroom.findStudentWithIdLinear(desiredId);
         long linearEnd = System.nanoTime();
+
         long mapStart = System.nanoTime();
         mapResult = classroom.findStudentWithIdMap(desiredId);
         long mapEnd = System.nanoTime();
+
         long linearTime = linearEnd - linearStart;
         long mapTime = mapEnd - mapStart;
         System.out.println("Linear search time: " + linearTime + " - " + linearResult.getName());
