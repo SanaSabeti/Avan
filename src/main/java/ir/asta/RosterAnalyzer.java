@@ -60,20 +60,7 @@ public class RosterAnalyzer {
                     classroom.sortStudents();
                     break;
                 case 6:
-                    Student linearResult;
-                    Student mapResult;
-                    System.out.println("Enter ur desired student ID:");
-                    int desiredId = scanner.nextInt();
-                    long linearStart = System.nanoTime();
-                    linearResult = classroom.findStudentWithIdLinear(desiredId);
-                    long linearEnd = System.nanoTime();
-                    long mapStart = System.nanoTime();
-                    mapResult = classroom.findStudentWithIdMap(desiredId);
-                    long mapEnd = System.nanoTime();
-                    long linearTime = linearEnd - linearStart;
-                    long mapTime = mapEnd - mapStart;
-                    System.out.println("Linear search time: " + linearTime + " - " + linearResult.getName());
-                    System.out.println("HashMap search time: " + mapTime + " - " + mapResult.getName());
+                    handleCase6(scanner, classroom);
                     break;
                 case 7:
                     System.out.println("Goodbye!");
@@ -109,5 +96,22 @@ public class RosterAnalyzer {
             System.out.println("Add another student? (y/n)");
             answer = scanner.next().charAt(0);
         }
+    }
+
+    private static void handleCase6(Scanner scanner, Classroom classroom) {
+        Student linearResult;
+        Student mapResult;
+        System.out.println("Enter your desired student ID:");
+        int desiredId = scanner.nextInt();
+        long linearStart = System.nanoTime();
+        linearResult = classroom.findStudentWithIdLinear(desiredId);
+        long linearEnd = System.nanoTime();
+        long mapStart = System.nanoTime();
+        mapResult = classroom.findStudentWithIdMap(desiredId);
+        long mapEnd = System.nanoTime();
+        long linearTime = linearEnd - linearStart;
+        long mapTime = mapEnd - mapStart;
+        System.out.println("Linear search time: " + linearTime + " - " + linearResult.getName());
+        System.out.println("HashMap search time: " + mapTime + " - " + mapResult.getName());
     }
 }
