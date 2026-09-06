@@ -83,8 +83,8 @@ public class RosterAnalyzer {
                     classroom.sortStudents();
                     break;
                 case 6:
-                    Student linearResult = null;
-                    Student mapResult = null;
+                    Student linearResult ;
+                    Student mapResult ;
                     System.out.println("Enter ur desired student ID:");
                     int desiredId = scanner.nextInt();
                     long linearStart = System.nanoTime();
