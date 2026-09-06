@@ -65,9 +65,11 @@ public class Classroom implements Iterable<Student> {
         });
         List<Pair<Student, Integer>> rankedStudents = new ArrayList<>();
         int rank = 1;
-        for (Student student : this) {
-            rankedStudents.add(new Pair<>(student, rank));
-            rank++;
+        for (int i = 0; i < students.size(); i++) {
+            if (i > 0 && students.get(i).getScore() != students.get(i - 1).getScore()) {
+                rank++;
+            }
+            rankedStudents.add(new Pair<>(students.get(i), rank));
         }
         for (Pair<Student, Integer> pair : rankedStudents) {
             System.out.println("Rank: " + pair.getSecondElement() + ") " + pair.getFirstElement().getName() + ", " + pair.getFirstElement().getScore());
