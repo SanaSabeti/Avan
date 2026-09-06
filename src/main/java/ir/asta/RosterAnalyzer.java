@@ -40,7 +40,7 @@ public class RosterAnalyzer {
             response = scanner.nextInt();
             switch (response) {
                 case 1:
-                    handleCase1(scanner, classroom);
+                    addStudentsFromInput(scanner, classroom);
                     break;
                 case 2:
                     classroom.showReport();
@@ -60,7 +60,7 @@ public class RosterAnalyzer {
                     classroom.sortStudents();
                     break;
                 case 6:
-                    handleCase6(scanner, classroom);
+                    findStudentAndComparePerformance(scanner, classroom);
                     break;
                 case 7:
                     System.out.println("Goodbye!");
@@ -71,7 +71,7 @@ public class RosterAnalyzer {
         } while (response != 7);
     }
 
-    private static void handleCase1(Scanner scanner, Classroom classroom) {
+    private static void addStudentsFromInput(Scanner scanner, Classroom classroom) {
         char answer = 'y';
         while (answer == 'y') {
             while (true) {
@@ -98,7 +98,7 @@ public class RosterAnalyzer {
         }
     }
 
-    private static void handleCase6(Scanner scanner, Classroom classroom) {
+    private static void findStudentAndComparePerformance(Scanner scanner, Classroom classroom) {
         Student linearResult;
         Student mapResult;
         System.out.println("Enter your desired student ID:");
