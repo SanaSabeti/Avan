@@ -8,15 +8,15 @@ public class Classroom implements Iterable<Student> {
     private Set<String> names = new HashSet<>();
     private HashMap<Integer, Student> studentsWithId = new HashMap<>();
 
-    public boolean addStudent(Student student) throws InvalidScoreException {
-        if (!names.add(student.getName())) {
-            return false;
-        }
+    public boolean addStudent(Student student) throws InvalidScoreException, DuplicateStudentException {
         if (student.getScore() < 0 || student.getScore() > 100) {
-            throw new InvalidScoreException("""
-                Invalid score!
-                Enter the student again!""");
+            throw new InvalidScoreException("Invalid score!");
         }
+
+        if (!names.add(student.getName())) {
+            throw new DuplicateStudentException("Duplicate student!");
+        }
+
         students.add(student);
         persons.add(student);
         studentsWithId.put(student.getId(), student);

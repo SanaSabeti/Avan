@@ -30,14 +30,10 @@ public class RosterAnalyzer {
 
             Student student = new Student(name, score);
             try {
-                if (classroom.addStudent(student)){
-                    counter++;
-                    System.out.println("OK, Next!");
-                }
-                else {
-                    System.out.println("Duplicate name! Pls Enter the student again!");
-                }
-            }catch (InvalidScoreException e){
+                classroom.addStudent(student);
+                counter++;
+                System.out.println("OK, Next!");
+            } catch (InvalidScoreException | DuplicateStudentException e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -96,12 +92,9 @@ public class RosterAnalyzer {
 
                 Student student = new Student(name, score);
                 try {
-                    if (classroom.addStudent(student)) {
-                        break;
-                    } else {
-                        System.out.println("Duplicate name! Pls Enter the student again!");
-                    }
-                } catch (InvalidScoreException e) {
+                    classroom.addStudent(student);
+                    break;
+                } catch (InvalidScoreException | DuplicateStudentException e) {
                     System.out.println(e.getMessage());
                 }
             }
