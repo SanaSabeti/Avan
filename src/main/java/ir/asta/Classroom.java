@@ -8,7 +8,7 @@ public class Classroom implements Iterable<Student> {
     private Set<String> names = new HashSet<>();
     private HashMap<Integer, Student> studentsWithId = new HashMap<>();
 
-    public boolean addStudent(Student student) throws InvalidScoreException, DuplicateStudentException {
+    public boolean addStudent(Student student) throws InvalidScoreException {
         if (student.getScore() < 0 || student.getScore() > 100) {
             throw new InvalidScoreException("Invalid score!");
         }
@@ -28,37 +28,19 @@ public class Classroom implements Iterable<Student> {
     }
 
     public double average() {
-        int sum = 0;
-        for (Student student : this) {
-            sum += student.getScore();
-        }
-        return (double) sum / students.size();
+        return students.stream().mapToInt(Student::getScore).average().orElse(0.0);
     }
 
     public int max() {
-        int maximum = students.get(0).getScore();
-        for (Student student : students) {
-            if (student.getScore() > maximum) {
-                maximum = student.getScore();
-            }
-        }
-        return maximum;
+        return students.stream().mapToInt(Student::getScore).max().orElse(0);
     }
 
     public int min() {
-        int minimum = students.get(0).getScore();
-        for (Student student : students) {
-            if (student.getScore() < minimum) {
-                minimum = student.getScore();
-            }
-        }
-        return minimum;
+        return students.stream().mapToInt(Student::getScore).min().orElse(0);
     }
 
     public void curve(int points) {
-        for (Student student : this) {
-            student.curveScore(points);
-        }
+        students.stream().forEach(student -> student.curveScore(points));
     }
 
     public void sortStudents() {
@@ -102,12 +84,7 @@ public class Classroom implements Iterable<Student> {
     }
 
     public Student findStudentWithIdLinear(int id) {
-        for (Student student : students) {
-            if (student.getId() == id) {
-                return student;
-            }
-        }
-        return null;
+        return students.stream().filter(student -> student.getId() == id).findFirst().orElse(null);
     }
 
     @Override
