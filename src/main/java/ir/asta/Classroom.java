@@ -1,16 +1,21 @@
 package ir.asta;
-import java.util.ArrayList;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
-public class Classroom {
+public class Classroom implements Iterable<Student> {
     private List<Student> students = new ArrayList<>();
     private List<Person> persons = new ArrayList<>();
+    private Set<String> names = new HashSet<>();
+    private HashMap<Integer, Student> studentsWithId = new HashMap<>();
 
-    public void addStudent(Student student) {
+    public boolean addStudent(Student student) {
+        if (!names.add(student.getName())) {
+            return false;
+        }
         students.add(student);
         persons.add(student);
+        studentsWithId.put(student.getId(), student);
+        return true;
     }
 
     public void addTeacher(Teacher teacher) {
@@ -19,7 +24,7 @@ public class Classroom {
 
     public double average() {
         int sum = 0;
-        for (Student student : students) {
+        for (Student student : this) {
             sum += student.getScore();
         }
         return (double) sum / students.size();
@@ -46,7 +51,7 @@ public class Classroom {
     }
 
     public void curve(int points) {
-        for (Student student : students) {
+        for (Student student : this) {
             student.curveScore(points);
         }
     }
@@ -55,11 +60,19 @@ public class Classroom {
         students.sort(new Comparator<Student>() {
             @Override
             public int compare(Student s1, Student s2) {
-                return Integer.compare(s1.getScore(), s2.getScore());
+                return Integer.compare(s2.getScore(), s1.getScore());
             }
         });
-        for (Student s : students) {
-            System.out.println(s.toString());
+        List<Pair<Student, Integer>> rankedStudents = new ArrayList<>();
+        int rank = 1;
+        for (int i = 0; i < students.size(); i++) {
+            if (i > 0 && students.get(i).getScore() != students.get(i - 1).getScore()) {
+                rank++;
+            }
+            rankedStudents.add(new Pair<>(students.get(i), rank));
+        }
+        for (Pair<Student, Integer> pair : rankedStudents) {
+            System.out.println("Rank: " + pair.getSecondElement() + ") " + pair.getFirstElement().getName() + ", " + pair.getFirstElement().getScore());
         }
     }
 
@@ -77,5 +90,41 @@ public class Classroom {
         System.out.println("Average: " + average());
         System.out.println("Maximum: " + max());
         System.out.println("Minimum: " + min());
+    }
+
+    public Student findStudentWithIdMap(int id) {
+        return studentsWithId.get(id);
+    }
+
+    public Student findStudentWithIdLinear(int id) {
+        for (Student student : students) {
+            if (student.getId() == id) {
+                return student;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Iterator<Student> iterator() {
+        return new Iterator<Student>() {
+            int counter = 0;
+
+            @Override
+            public boolean hasNext() {
+                return counter < students.size();
+            }
+
+            @Override
+            public Student next() {
+                return students.get(counter++);
+            }
+        };
+    }
+
+    public void addStudents(Student... students) {
+        for (Student student : students) {
+            addStudent(student);
+        }
     }
 }
