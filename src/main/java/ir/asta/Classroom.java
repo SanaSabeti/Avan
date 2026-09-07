@@ -8,9 +8,14 @@ public class Classroom implements Iterable<Student> {
     private Set<String> names = new HashSet<>();
     private HashMap<Integer, Student> studentsWithId = new HashMap<>();
 
-    public boolean addStudent(Student student) {
+    public boolean addStudent(Student student) throws InvalidScoreException {
         if (!names.add(student.getName())) {
             return false;
+        }
+        if (student.getScore() < 0 || student.getScore() > 100) {
+            throw new InvalidScoreException("""
+                Invalid score!
+                Enter the student again!""");
         }
         students.add(student);
         persons.add(student);
@@ -122,9 +127,10 @@ public class Classroom implements Iterable<Student> {
         };
     }
 
-    public void addStudents(Student... students) {
+    public void addStudents(Student... students) throws InvalidScoreException {
         for (Student student : students) {
             addStudent(student);
         }
     }
 }
+
