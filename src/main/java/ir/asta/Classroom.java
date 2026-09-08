@@ -44,12 +44,7 @@ public class Classroom implements Iterable<Student> {
     }
 
     public void sortStudents() {
-        students.sort(new Comparator<Student>() {
-            @Override
-            public int compare(Student s1, Student s2) {
-                return Integer.compare(s2.getScore(), s1.getScore());
-            }
-        });
+        students.sort((s1, s2) -> Integer.compare(s2.getScore(), s1.getScore()));
         List<Pair<Student, Integer>> rankedStudents = new ArrayList<>();
         int rank = 1;
         for (int i = 0; i < students.size(); i++) {
