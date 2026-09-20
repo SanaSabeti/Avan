@@ -15,8 +15,8 @@ public class ClassroomTest {
     @Test
     void addStudentTest() throws InvalidScoreException {
         Student student = new Student("Sana", 80);
-        boolean result = classroom.addStudent(student);
-        assertTrue(result);
+        classroom.addStudent(student);
+        assertEquals(student, classroom.findStudentWithIdMap(student.getId()));
     }
 
     @Test

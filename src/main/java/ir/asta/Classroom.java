@@ -16,7 +16,7 @@ public class Classroom implements Iterable<Student> {
      * @throws InvalidScoreException     if score is invalid
      * @throws DuplicateStudentException if name is duplicated
      */
-    public boolean addStudent(Student student) throws InvalidScoreException {
+    public void addStudent(Student student) throws InvalidScoreException {
         if (student.getScore() < 0 || student.getScore() > 100) {
             throw new InvalidScoreException("Invalid score!");
         }
@@ -28,7 +28,6 @@ public class Classroom implements Iterable<Student> {
         students.add(student);
         persons.add(student);
         studentsWithId.put(student.getId(), student);
-        return true;
     }
 
     /**
