@@ -43,21 +43,30 @@ public class Classroom implements Iterable<Student> {
      * @return average score
      */
     public double average() {
-        return students.stream().mapToInt(Student::getScore).average().orElse(0.0);
+        return students.stream()
+            .mapToInt(Student::getScore)
+            .average()
+            .orElse(0.0);
     }
 
     /**
      * @return highest score
      */
     public int max() {
-        return students.stream().mapToInt(Student::getScore).max().orElse(0);
+        return students.stream()
+            .mapToInt(Student::getScore)
+            .max()
+            .orElse(0);
     }
 
     /**
      * @return lowest score
      */
     public int min() {
-        return students.stream().mapToInt(Student::getScore).min().orElse(0);
+        return students.stream()
+            .mapToInt(Student::getScore)
+            .min()
+            .orElse(0);
     }
 
     /**
@@ -66,7 +75,8 @@ public class Classroom implements Iterable<Student> {
      * @param points to add
      */
     public void curve(int points) {
-        students.stream().forEach(student -> student.curveScore(points));
+        students.stream()
+            .forEach(student -> student.curveScore(points));
     }
 
     /**
@@ -125,7 +135,9 @@ public class Classroom implements Iterable<Student> {
      * @return student with the given ID, or null
      */
     public Student findStudentWithIdLinear(int id) {
-        return students.stream().filter(student -> student.getId() == id).findFirst().orElse(null);
+        return students.stream()
+            .filter(student -> student.getId() == id)
+            .findFirst().orElse(null);
     }
 
     /**
