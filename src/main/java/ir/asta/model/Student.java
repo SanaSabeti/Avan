@@ -1,32 +1,33 @@
-package ir.asta;
+package ir.asta.model;
+
+import ir.asta.Gradable;
+import ir.asta.Grade;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 
+@Entity
 public class Student extends Person implements Gradable {
-    private static int liveInstance = 0;
-    private final int id;
+    @Id
+    @GeneratedValue
+    private int id;
     private int score;
+    @ManyToOne (optional = false)
+    @JoinColumn(name = "classroomId" , nullable = false)
+    private Classroom classroom;
 
     static {
         System.out.println("Student class loaded");
     }
 
     /**
-     * Creates a student with default name and score.
+     * Creates a student.
      */
     public Student() {
-        this("unknown", 0);
     }
 
-    /**
-     * Creates a student with a name and score.
-     *
-     * @param name  student name
-     * @param score student score
-     */
     public Student(String name, int score) {
         super(name);
-        this.id = ++liveInstance;
         this.score = score;
     }
 
@@ -42,6 +43,14 @@ public class Student extends Person implements Gradable {
      */
     public int getId() {
         return id;
+    }
+
+    public Classroom getClassroom() {
+        return classroom;
+    }
+
+    public void setClassroom(Classroom classroom) {
+        this.classroom = classroom;
     }
 
     /**

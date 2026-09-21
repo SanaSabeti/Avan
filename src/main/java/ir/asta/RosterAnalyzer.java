@@ -1,5 +1,11 @@
 package ir.asta;
 
+import ir.asta.exception.DuplicateStudentException;
+import ir.asta.exception.InvalidScoreException;
+import ir.asta.model.Classroom;
+import ir.asta.model.Student;
+import ir.asta.model.Teacher;
+
 import java.util.Scanner;
 
 public class RosterAnalyzer {

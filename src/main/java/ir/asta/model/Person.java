@@ -1,12 +1,21 @@
-package ir.asta;
+package ir.asta.model;
+
+import jakarta.persistence.MappedSuperclass;
+
 import java.time.LocalDateTime;
 
+@MappedSuperclass
 public abstract class Person {
-    private final String name;
-    private final LocalDateTime createdAt;
+    private String name;
+    private LocalDateTime createdAt;
 
-    {
-        createdAt = LocalDateTime.now();
+    protected Person() {
+        this.createdAt = LocalDateTime.now();
+    }
+
+    protected Person(String name) {
+        this.name = name;
+        this.createdAt = LocalDateTime.now();
     }
 
     public String getName() {
@@ -15,10 +24,6 @@ public abstract class Person {
 
     public String getCreatedAt() {
         return createdAt.toString();
-    }
-
-    protected Person(String name) {
-        this.name = name;
     }
 
     protected String showInfo() {
