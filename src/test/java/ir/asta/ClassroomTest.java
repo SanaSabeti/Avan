@@ -1,5 +1,8 @@
 package ir.asta;
 
+import ir.asta.exception.InvalidScoreException;
+import ir.asta.model.Classroom;
+import ir.asta.model.Student;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

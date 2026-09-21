@@ -1,4 +1,4 @@
-package ir.asta;
+package ir.asta.exception;
 
 public class DuplicateStudentException extends RuntimeException {
     public DuplicateStudentException(String message) {

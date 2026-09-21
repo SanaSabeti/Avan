@@ -1,4 +1,4 @@
-package ir.asta;
+package ir.asta.exception;
 
 public class InvalidScoreException extends Exception{
     public InvalidScoreException(String message){

@@ -1,13 +1,24 @@
-package ir.asta;
+package ir.asta.model;
+
+import jakarta.persistence.*;
+
 import java.util.Objects;
 
+@Entity
 public class Teacher extends Person {
-    private static int liveInstance = 0;
-    private final int id;
+    @Id
+    @GeneratedValue
+    private int id;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "classroomId", nullable = false)
+    private Classroom classroom;
 
     public Teacher(String name) {
         super(name);
-        this.id = ++liveInstance;
+    }
+
+    public Teacher() {
     }
 
     @Override
@@ -35,6 +46,18 @@ public class Teacher extends Person {
     @Override
     public String describe() {
         return super.showInfo() + ", Teacher ID: " + id;
+    }
+
+    public Classroom getClassroom() {
+        return classroom;
+    }
+
+    public void setClassroom(Classroom classroom) {
+        this.classroom = classroom;
+    }
+
+    public int getId() {
+        return id;
     }
 }
 

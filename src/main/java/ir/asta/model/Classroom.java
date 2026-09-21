@@ -1,12 +1,36 @@
-package ir.asta;
+package ir.asta.model;
 
 import java.util.*;
 
+import ir.asta.*;
+import ir.asta.exception.DuplicateStudentException;
+import ir.asta.exception.InvalidScoreException;
+import jakarta.persistence.*;
+
+@Entity
 public class Classroom implements Iterable<Student> {
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @OneToMany(mappedBy = "classroom")
     private List<Student> students = new ArrayList<>();
+
+    @Transient
     private List<Person> persons = new ArrayList<>();
+
+    @Transient
     private Set<String> names = new HashSet<>();
+
+    @Transient
     private HashMap<Integer, Student> studentsWithId = new HashMap<>();
+
+    public Classroom() {
+    }
+
+    public Long getId() {
+        return id;
+    }
 
     /**
      * Adds a student to the classroom
@@ -25,6 +49,7 @@ public class Classroom implements Iterable<Student> {
             throw new DuplicateStudentException("Duplicate student!");
         }
 
+        student.setClassroom(this);
         students.add(student);
         persons.add(student);
         studentsWithId.put(student.getId(), student);
@@ -36,6 +61,7 @@ public class Classroom implements Iterable<Student> {
      * @param teacher to add
      */
     public void addTeacher(Teacher teacher) {
+        teacher.setClassroom(this);
         persons.add(teacher);
     }
 

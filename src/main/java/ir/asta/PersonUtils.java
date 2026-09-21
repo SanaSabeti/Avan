@@ -1,5 +1,7 @@
 package ir.asta;
 
+import ir.asta.model.Person;
+
 import java.util.List;
 import java.util.Objects;
 
